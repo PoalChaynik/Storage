@@ -12,7 +12,7 @@ db.execute("""CREATE TABLE IF NOT EXISTS storage
 
 def Redigesana():
 
-    izvele = input('1-add|2-edit: ')
+    izvele = input('1 - Pievienosana | 2 - Datu Mainisana:  ')
 
     if izvele == '1':
         while True:
@@ -53,6 +53,24 @@ def Redigesana():
         db.commit()
 
     elif izvele == '2':
-        print()
+        data = db.execute("""SELECT * FROM storage""")
+        for i in data:
+            print('ID:',i[0],'|','Name:',i[1],'|','Quantity:',i[2],'|','Price:',i[3])
+        while True:
+            id = input('Ievadiet ID Precei, Kuras Datus Gribat Mainit: ')
+            if id.isdigit():
+                if int(id) <= i[0]:
+                    break
+                else:
+                    print('Ievadiet Preces ID Velreiz!')
+                    continue                   
+            else:
+                print('Ievadiet Preces ID Velreiz!')
+                continue
+
+        print('Izvelaties Ko Jus Gribat Mainit?')
+        while True:
+            editing1 = input('1 - Vards | 2 - Daudzums | 3 - Cena: ')
+            
 
 Redigesana()
