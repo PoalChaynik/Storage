@@ -70,7 +70,59 @@ def Redigesana():
 
         print('Izvelaties Ko Jus Gribat Mainit?')
         while True:
-            editing1 = input('1 - Vards | 2 - Daudzums | 3 - Cena: ')
-            
+            editing1 = input('1 - Nosaukums | 2 - Daudzums | 3 - Cena: ')
+            if editing1.isdigit() and int(editing1) <= 3:
+                break
+            else:
+                print('Velreiz Izvelaties Ko Jus Gribat Mainit!')
+                continue
+
+        newName = 'Ievadiet Jaunu Preces Nosaukumu: '
+        newQuantity = 'Ievadiet Jaunu Preces Daudzumu: '
+        newPrice = 'Ievadiet Jaunu Preces Cenu: '
+
+        if editing1 == '1':
+            while True:
+                newData = input(newName)
+                if newData.isdigit() == False:
+                    if newData.strip() == '':
+                        print('Ievadiet Atkartoti Preces Nosaukumu!')
+                        continue
+                    else:
+                        break
+                else:
+                    print('Ievadiet Atkartoti Preces Nosaukumu!')
+                    continue
+
+            newData = (newData,id)
+            print(newData)
+            db.execute("""UPDATE storage SET Name=? WHERE ID=?""", newData)
+            db.commit()
+
+        elif editing1 == '2':
+            while True:
+                newData = input(newQuantity)
+                if newData.isdigit():
+                    break
+                else:
+                    print('Ievadiet Atkartoti Preces Daudzumu!')
+                    continue
+
+            newData = (newData,id)
+            print(newData)
+            db.execute("""UPDATE storage SET Quantity=? WHERE ID=?""", newData)
+            db.commit()
+        elif editing1 == '3':
+            while True:
+                newData = input(newPrice)
+                if newData.isdigit():
+                    break
+                else:
+                    print('Ievadiet Atkartoti Preces Cenu!')
+                    continue
+            newData = (newData,id)
+            print(newData)
+            db.execute("""UPDATE storage SET Price=? WHERE ID=?""", newData)
+            db.commit()
 
 Redigesana()
