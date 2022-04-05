@@ -55,7 +55,7 @@ def Redigesana():
     elif izvele == '2':
         data = db.execute("""SELECT * FROM storage""")
         for i in data:
-            print('ID:',i[0],'|','Name:',i[1],'|','Quantity:',i[2],'|','Price:',i[3])
+            print('ID:',i[0],'|','Nosaukums:',i[1],'|','Daudzums:',i[2],'|','Cena:',i[3])
         while True:
             id = input('Ievadiet ID Precei, Kuras Datus Gribat Mainit: ')
             if id.isdigit():
@@ -125,4 +125,31 @@ def Redigesana():
             db.execute("""UPDATE storage SET Price=? WHERE ID=?""", newData)
             db.commit()
 
-Redigesana()
+def Searching():
+    while True:
+        print('Izvelaties Meklesanas Veidu!')
+        veids = input('1 - Pec ID | 2 - Pec Varda | 3 - Paradit Visus Datus: ')
+        if veids == '3':
+            visiDati = db.execute("SELECT * FROM storage")
+            print()
+            for i in visiDati:
+                print('ID:',i[0],'|','Nosaukums:',i[1],'|','Daudzums:',i[2],'|','Cena:',i[3])    
+        print()   
+        break
+
+
+
+
+
+while True:
+    menu = input("MENU| 1 - Meklesana | 2 - Redigesana | 3 - Iziet: ")
+    if menu == '2':
+        Redigesana()
+    elif menu == '1':
+        Searching()
+    elif menu == '3':
+        db.close()
+        exit()
+    else:
+        print('Ievadiet Izveles Variantu Velreiz!')
+        continue
